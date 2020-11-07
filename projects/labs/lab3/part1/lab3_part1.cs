@@ -8,13 +8,13 @@ class lab3_part1
 
         int arrayLength;
         
-        WriteLine ( "Enter number of heights:" ); // < -------- modify this line
+        WriteLine ( "Enter number of heights:" );
         arrayLength = int.Parse ( ReadLine() );
 
         if (arrayLength < 1){
-            WriteLine ( "is not correct" ); // < --------- aaand this 
+            WriteLine ( "is not correct" );
         } else {
-            int [] firstArray = new int [arrayLength]; // < ---- random numbers array
+            int [] firstArray = new int [arrayLength]; 
 
             WriteLine ( "Enter heights:" );
 
@@ -24,17 +24,17 @@ class lab3_part1
             }
             
             
-            int [] secondArray = new int [arrayLength]; // < ----- "min is 0" array
+            int [] normArray = new int [arrayLength]; // < ----- "min is 0" array
 
             int minV = Abs ( FindMin(firstArray) );
             
             for (int i = 0; i < arrayLength; i++)
             {
-                secondArray [i] = firstArray[i] + minV;
+                normArray [i] = firstArray[i] + minV;
 
                 // for tests
                 Write ("second array: ");
-                WriteLine (secondArray[i]);
+                WriteLine (normArray[i]);
             }
 
 
@@ -42,11 +42,11 @@ class lab3_part1
 
             double [] thirdArray = new double [arrayLength]; // < ---- "max is 1" array
 
-            int maxV = FindMax (secondArray);
+            int maxV = FindMax (normArray);
 
             for (int item = 0; item < arrayLength; item ++)
             {
-                thirdArray [item] = (double) secondArray[item] / maxV;
+                thirdArray [item] = (double) normArray[item] / maxV;
                 thirdArray [item] = Round (thirdArray[item], 3);
             }
             
@@ -61,11 +61,11 @@ class lab3_part1
             } else {
 
                 int [] waterArray = new int [arrayLength];
-                FillWaterArr (secondArray, arrayLength, waterArray, waterLvl);
+                FillWaterArr (normArray, arrayLength, waterArray, waterLvl);
                 
 
                 int [,] forOutput = new int [maxV, arrayLength];
-                FillForOutputArr (secondArray, forOutput, waterLvl);
+                FillForOutputArr (normArray, forOutput, waterLvl);
 
 
                 
@@ -83,7 +83,7 @@ class lab3_part1
                 
 
 
-                int area = Mountain (secondArray, maxV, waterLvl);
+                int area = Mountain (normArray, maxV, waterLvl);
                 int fullArea = 1 * area;
 
                 WriteLine ("");
