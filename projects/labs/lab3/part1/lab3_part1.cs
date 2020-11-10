@@ -24,17 +24,13 @@ class lab3_part1
             }
             
             
-            int [] normArray = new int [arrayLength]; // < ----- "min is 0" array
+            int [] normArray = new int [arrayLength];
 
             int minV = Abs ( FindMin(firstArray) );
             
             for (int i = 0; i < arrayLength; i++)
             {
                 normArray [i] = firstArray[i] + minV;
-
-                // for tests
-                Write ("second array: ");
-                WriteLine (normArray[i]);
             }
 
 
@@ -86,9 +82,9 @@ class lab3_part1
                 int area = Mountain (normArray, maxV, waterLvl);
                 int fullArea = 1 * area;
 
-                WriteLine ("");
+                WriteLine ();
                 WriteLine ( "> Area of the highest mountain: {0} sq. m.", fullArea );
-
+                WriteLine ();
             }
         }
 
