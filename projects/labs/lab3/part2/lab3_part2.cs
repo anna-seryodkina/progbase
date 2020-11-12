@@ -90,7 +90,10 @@ class lab3_part2
 
 
         WaterToLandSpot(newLandArray, counters, cMax);
+<<<<<<< HEAD
         
+=======
+>>>>>>> 2a444d1cf5976cd9a3c736160e904cce4c491513
         WriteLine ();
 
 
