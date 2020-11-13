@@ -29,20 +29,8 @@ class lab3_part2_
         int c;
         c = 1;
         
-        for (int i = 0; i < newLandArray.GetLength(0); i++)
-        {
-            for (int j = 0; j < newLandArray.GetLength(1); j++)
-            {
-                
-                if (zeroOneArray[i,j] == 0)
-                {
-                    newLandArray [i,j] = 0;
-                } else {
-                    newLandArray [i,j] = c;
-                    c ++;
-                }
-            }
-        }
+        c = FillNewLand (newLandArray, zeroOneArray, c);
+        
 
 
         int [] counters = new int[c]; 
@@ -96,11 +84,35 @@ class lab3_part2_
         WriteLine ("> Your map:");
         PrintMatrix (newLandArray);
 
+    }
 
 
 
 
-        // -------------- Functions: --------------
+
+
+
+    // -------------- Functions: --------------
+
+
+        static int FillNewLand (int[,] newLandArray, int[,] zeroOneArray, int c)
+        {
+            for (int i = 0; i < newLandArray.GetLength(0); i++)
+            {
+                for (int j = 0; j < newLandArray.GetLength(1); j++)
+                {
+                    
+                    if (zeroOneArray[i,j] == 0)
+                    {
+                        newLandArray [i,j] = 0;
+                    } else {
+                        newLandArray [i,j] = c;
+                        c ++;
+                    }
+                }
+            }
+            return c;
+        }
 
         static int checkNewLand (int [,] landArr, int [] count, int nChanges)
         {
@@ -145,9 +157,9 @@ class lab3_part2_
                     if (prevValue != landArr[i,j])
                     {
                         nChanges ++;
-                        count [prevValue] = count[prevValue] - 1;
+                        count [prevValue] -= 1;
                         count [landArr[i,j]] ++;
-                    }
+                    } 
                     
                     
                 }
@@ -286,5 +298,7 @@ class lab3_part2_
             }
         }
 
-    }
+
+
+
 }
