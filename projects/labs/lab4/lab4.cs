@@ -144,6 +144,6 @@ class lab4
                 }
             }
         } 
-        while (key.Key != ConsoleKey.F);
+        while (key.Key != ConsoleKey.F); 
     }
 }
