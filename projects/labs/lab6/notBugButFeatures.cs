@@ -58,11 +58,10 @@ namespace lab6
                     string outString = String.Join("\r\n", forOutput);
                     WriteLine (outString);
                 }                
-            }
-            
+            }            
             else if (options.inputFile == "")
             {
-                WriteLine ("error 222: no input file in standart mode");
+                WriteLine ("error 222: no input file in standard mode");
             }
             else if (options.hasParsingError)
             {
@@ -269,7 +268,7 @@ namespace lab6
                 {
                     if (char.IsWhiteSpace(input[i]) || char.IsPunctuation(input[i]))
                     {
-                        state = State.Initial;  
+                        state = State.Initial; 
                         continue;
                     }
                     else
@@ -277,7 +276,11 @@ namespace lab6
                         continue;
                     }
                 }
-            }            
+            }      
+            if (state == State.Identifier)
+            {
+                identifierArray[r] = word;
+            }      
 
             string[] identifierArray1 = new string[counter];
             for (int x = 0; x < identifierArray1.Length; x++)
@@ -317,7 +320,7 @@ namespace lab6
             Debug.Assert(String.Join(",", GetAllIdentifiers("mooo,_ident1f ")) == "mooo,_ident1f", "Moooo");
             Debug.Assert(String.Join(",", GetAllIdentifiers("_oomoon ")) == "_oomoon", "wtf is going on???");
 
-            //WriteLine("damn, no bugs. *sad tester* ");
+            //WriteLine("damn, no bugs.");
         }
 
         static Options ParseOptions (string[] args)
@@ -415,4 +418,3 @@ namespace lab6
 
     }
 }
-
