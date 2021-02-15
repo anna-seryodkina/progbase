@@ -48,34 +48,34 @@ namespace s2_lab1
             _size++;
         }
         
-        public void Insert(int index, Planet newPlanet)
-        {
-            EnsureCapacity(this.Count+1);
-            for(int i = this.Count; i > index; i-=1)
-            {
-                _items[i] = _items[i-1];
-            }
-            _items[index] = newPlanet;
-            _size++;
-        }
-        public bool Remove(Planet planet) 
-        {
-            int toCheck = 0;
-            for(int i = 0; i < this.Count; i++)
-            {
-                if(_items[i] == planet)
-                {
-                    this.RemoveAt(i);
-                    toCheck++;
-                    break;
-                }
-            }
-            if(toCheck == 0)
-            {
-                return false;
-            }
-            return true;
-        }
+        // public void Insert(int index, Planet newPlanet)
+        // {
+        //     EnsureCapacity(this.Count+1);
+        //     for(int i = this.Count; i > index; i-=1)
+        //     {
+        //         _items[i] = _items[i-1];
+        //     }
+        //     _items[index] = newPlanet;
+        //     _size++;
+        // }
+        // public bool Remove(Planet planet) 
+        // {
+        //     int toCheck = 0;
+        //     for(int i = 0; i < this.Count; i++)
+        //     {
+        //         if(_items[i] == planet)
+        //         {
+        //             this.RemoveAt(i);
+        //             toCheck++;
+        //             break;
+        //         }
+        //     }
+        //     if(toCheck == 0)
+        //     {
+        //         return false;
+        //     }
+        //     return true;
+        // }
         public void RemoveAt(int index)
         {
             if(index < 0 || index > this.Count)
@@ -88,10 +88,10 @@ namespace s2_lab1
             }
             _size -= 1;
         }
-        public void Clear()
-        {
-            this._size = 0;
-        }
+        // public void Clear()
+        // {
+        //     this._size = 0;
+        // }
         
         public int Count 
         {
@@ -158,44 +158,43 @@ namespace s2_lab1
                 WriteLine("> error.");
                 return;
             }
-            string filePath = args[0]; // check if path is in correct format ?????
+            string filePath = args[0];
             
             GenerateCSV(filePath, numberOfLinesCSV);
             // ------------- Part 2 -------------
             string path1 = "./firstInput.csv";
-            string path2 = "./secondInput.csv";
             GenerateCSV(path1, 20);
+            string path2 = "./secondInput.csv";            
             GenerateCSV(path2, 200000);
-
+            //
             ListPlanet list1 = new ListPlanet(); 
             list1 = ReadAllPlanets(path1);
-            // PrintList(list1);
+            PrintListInfo(list1);
             ListPlanet list2 = new ListPlanet(); 
             list2 = ReadAllPlanets(path2);
-            // PrintList(list2);
+            PrintListInfo(list2);
             ListPlanet coolList = new ListPlanet();
             coolList = FillMainList(list1, list2);
             //
-            double listAverage = FindAverage(coolList);
-            WriteLine($"average --> {listAverage}");
-            coolList = DeleteSomething(coolList, listAverage); // not working :((((
-            //
-            string path3 = "./outputPart222222.csv";
+            double listAverage = FindAverage(coolList); 
+            coolList = DeleteSomething(coolList, listAverage);
+            string path3 = "./outputPart2.csv";
             WriteAllPlanets(path3, coolList);
             ssww.Stop(); 
             WriteLine($"Elapsed = {ssww.Elapsed}");
         }
 
-        static ListPlanet DeleteSomething(ListPlanet planets, double av)
+        static ListPlanet DeleteSomething(ListPlanet mainList, double av)
         {
-            for(int r = 0; r < planets.Count; r++)
+            for(int r = 0; r < mainList.Count; r++)
             {
-                if(planets[r].size < av)
+                if(mainList[r].size < av)
                 {
-                    planets.Remove(planets[r]);
+                    mainList.RemoveAt(r);
+                    r-=1;
                 }
             }
-            return planets;
+            return mainList;
         }
 
         static double FindAverage(ListPlanet planets)
@@ -213,41 +212,25 @@ namespace s2_lab1
         static ListPlanet FillMainList(ListPlanet list1, ListPlanet list2)
         {
             ListPlanet mainList = new ListPlanet();
-            int check = 0;
-            for(int j = 0; j < list1.Count; j++)
+            bool[] usedIds = new bool [Math.Max(list1.Count, list2.Count)];
+            for(int u = 0; u < list1.Count; u++)
             {
-                check = 0;
-                for(int y = 0; y < mainList.Count; y++)
-                {
-                    if(mainList[y].id == list1[j].id)
-                    {
-                        check++;
-                        break;
-                    }
-                }    
-                if(check != 0)
+                if(usedIds[list1[u].id])
                 {
                     continue;
                 }
-                mainList.Add(list1[j]);
+                mainList.Add(list1[u]);
+                usedIds[list1[u].id] = true;            
             }
             
             for(int k = 0; k < list2.Count; k++)
             {
-                check = 0;
-                for(int y = 0; y < mainList.Count; y++)
-                {
-                    if(mainList[y].id == list2[k].id)
-                    {
-                        check++;
-                        break;
-                    }
-                }    
-                if(check != 0)
+                if(usedIds[list2[k].id])
                 {
                     continue;
-                }
+                }                
                 mainList.Add(list2[k]);
+                usedIds[list2[k].id] = true;                
             }
             return mainList;
         }
@@ -294,9 +277,10 @@ namespace s2_lab1
             sw.Close();
         }
 
-        static void PrintList(ListPlanet list)
+        static void PrintListInfo(ListPlanet list)
         {
-            for(int i = 0; i < list.Count; i++)
+            WriteLine($"> size: {list.Count}");
+            for(int i = 0; i < 10; i++)
             {
                 WriteLine(list[i].ToString());
             }
