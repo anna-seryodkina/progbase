@@ -48,34 +48,6 @@ namespace s2_lab1
             _size++;
         }
         
-        // public void Insert(int index, Planet newPlanet)
-        // {
-        //     EnsureCapacity(this.Count+1);
-        //     for(int i = this.Count; i > index; i-=1)
-        //     {
-        //         _items[i] = _items[i-1];
-        //     }
-        //     _items[index] = newPlanet;
-        //     _size++;
-        // }
-        // public bool Remove(Planet planet) 
-        // {
-        //     int toCheck = 0;
-        //     for(int i = 0; i < this.Count; i++)
-        //     {
-        //         if(_items[i] == planet)
-        //         {
-        //             this.RemoveAt(i);
-        //             toCheck++;
-        //             break;
-        //         }
-        //     }
-        //     if(toCheck == 0)
-        //     {
-        //         return false;
-        //     }
-        //     return true;
-        // }
         public void RemoveAt(int index)
         {
             if(index < 0 || index > this.Count)
@@ -88,10 +60,6 @@ namespace s2_lab1
             }
             _size -= 1;
         }
-        // public void Clear()
-        // {
-        //     this._size = 0;
-        // }
         
         public int Count 
         {
