@@ -207,7 +207,7 @@ namespace s2_lab1
             };
             string[] noun = new string[]
             {
-                "Apple", "Banana", "Mango", "Watemelon", "Pumpkin", "Tangerine", "Avocado"
+                "Apple", "Banana", "Mango", "Watermelon", "Pumpkin", "Tangerine", "Avocado"
             };
             string[] colors = new string[] 
             {
