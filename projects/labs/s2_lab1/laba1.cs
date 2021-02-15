@@ -1,6 +1,5 @@
 ﻿using System;
 using static System.Console;
-using System.Diagnostics;
 using System.IO;
 
 namespace s2_lab1
@@ -52,7 +51,7 @@ namespace s2_lab1
         {
             if(index < 0 || index > this.Count)
             {
-                throw new Exception("> incorrect index.");
+                throw new Exception("incorrect index.");
             }
             for(int i = index; i < this.Count; i++)
             {
@@ -81,7 +80,7 @@ namespace s2_lab1
             {
                 if(index < 0 || index > this.Count)
                 {
-                    throw new Exception("> incorrect index.");
+                    throw new Exception("incorrect index.");
                 }
                 return _items[index];
             }
@@ -89,7 +88,7 @@ namespace s2_lab1
             {
                 if(index < 0 || index > this.Count)
                 {
-                    throw new Exception("> incorrect index.");
+                    throw new Exception("incorrect index.");
                 }
                 _items[index] = value;
             }
@@ -107,8 +106,6 @@ namespace s2_lab1
     {
         static void Main(string[] args)
         {
-            Stopwatch ssww = new Stopwatch();
-            ssww.Start();
             // ------------- Part 1 -------------
             if(args.Length != 2)
             {
@@ -148,8 +145,6 @@ namespace s2_lab1
             coolList = DeleteSomething(coolList, listAverage);
             string path3 = "./outputPart2.csv";
             WriteAllPlanets(path3, coolList);
-            ssww.Stop(); 
-            WriteLine($"Elapsed = {ssww.Elapsed}");
         }
 
         static ListPlanet DeleteSomething(ListPlanet mainList, double av)
